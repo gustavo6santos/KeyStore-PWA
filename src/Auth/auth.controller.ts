@@ -7,11 +7,11 @@ import { Auth} from "./auth.model";
 export class AuthController{
     constructor(private authService: AuthService) {}
 
-    @Post('Login')
-        Login() {
-           return this.authService.Login()
+   /* @Post('Login')
+        Login(@Body () userDto: Auth) {
+           return this.authService.Login(userDto.username, userDto.password)
         }
-
+        */
     @Post('Register')
         Register() {
            return  this.authService.Register()
