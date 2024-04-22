@@ -1,15 +1,6 @@
 import * as mongoose from 'mongoose';
 
-export const  AuthSchema = new mongoose.Schema({
-        
-         username: String,
-         email: String,
-         password: String,
-         order_id: String,
-
-});
-
-export interface Auth {
+export interface AuthModel extends Document {
   
         username: string,
         email: string,

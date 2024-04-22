@@ -1,7 +1,10 @@
 import { Injectable } from "@nestjs/common";
-import { InjectModel } from "@nestjs/mongoose";
+import { InjectModel } from "@nestjs/mongoose"
+
 import { Model } from "mongoose";
 import { Auth } from "./auth.module";
+import { AuthModel } from "./auth.model";
+import { AuthSchema } from "./auth.schema";
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
 
@@ -10,10 +13,11 @@ import * as jwt from 'jsonwebtoken';
 
 export class AuthService{
     
-    constructor(@InjectModel('Auth') private readonly authModel: Model<Auth>) {}
+    constructor(@InjectModel(Auth.name) private  authModel: Model<Auth>) {}
 
-   /* async Login(email: string, password: string) {
+    async Login(LoginDt: LoginDt): Promise<{Token: string}> {
 
+      
         // Validations
 
         if (!email) {
@@ -26,7 +30,7 @@ export class AuthService{
         }
     
         // Check if user exists
-        const user = await this.authModel.findOneByUsername(username);
+        const user:Auth = await this.authModel.findOne({email});
     
         if (!user) {
     
@@ -59,7 +63,7 @@ export class AuthService{
     
         return { msg: 'Authentication completed successfully!', token };
       }
-      */
+      
 
     Register() {
         return { msg: 'I am registered.'}
