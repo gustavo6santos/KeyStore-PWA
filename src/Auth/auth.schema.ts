@@ -3,7 +3,7 @@ import { Document } from "mongoose";
 
 @Schema ({timestamps: true})
 
-export class user extends Document {
+export class user  {
 
     @Prop()
     username: string;
@@ -18,4 +18,4 @@ export class user extends Document {
     order_id: string;
 }
 
-export const AuthSchema = SchemaFactory.createForClass(user)
+export const UserSchema = SchemaFactory.createForClass(user)

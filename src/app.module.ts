@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { Auth } from './Auth/auth.module';
+import { AuthModule } from './Auth/auth.module';
 import { ProductModule } from './product/product.module';
 import { ReviewModule } from './review/review.module';
 import { ShopModule } from './shop/shop.module';
@@ -7,7 +7,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
-    Auth, 
+    AuthModule, 
     ProductModule, 
     ReviewModule, 
     ShopModule,
