@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NestMiddleware } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { AuthModule } from "./auth.module";
@@ -48,7 +48,7 @@ export class AuthService{
         }
     
         // Generate JWT token
-        const secret = process.env.SECRET || this.defaultSecret;;
+        const secret = process.env.SECRET || this.defaultSecret;
     
         const token = jwt.sign(
     
@@ -118,23 +118,70 @@ export class AuthService{
         return "User created with success!";
       }
     
+     
+        async getUser(id: string): Promise<any> {
+          try {
+            // Check if user exists
+            const user = await this.userModel.findById(id, "-password");
+      
+            if (!user) {
+              throw new Error("User not found!");
+            }
+      
+            const newUser = user.toObject();
+      
+            return newUser;
+          } catch (err) {
+            throw new Error(`Failed to fetch user: ${err.message}`);
+          }
+        }
+      
   
+        async getUsers(): Promise<any[]> {
+          try {
+            const users = await this.userModel.find();
+            if (!users || users.length === 0) {
+              throw new Error("No Results");
+            }
+            return users.map(user => {
+              const { password, ...userWithoutPassword } = user.toObject();
+              return userWithoutPassword;
+            });
+          } catch (error) {
+            throw new Error("Internal Server Error");
+          }
+        }
     
 
+        async verifyUserByEmail(email: string): Promise<boolean> {
+          try {
+            // Check if user exists in the database
+            const user = await this.userModel.findOne({ email });
+            return !!user; // Return true if user exists, false otherwise
+          } catch (error) {
+            throw new Error(error.message);
+          }
+        }
 
-    async InsertUser (username:string, email:string, password: string, order_id: string) {
-        const newUser = new this.userModel({
-            username,
-            email,
-            password,
-            order_id
-        });
-
-       const result = await newUser.save();
-       console.log(result);
-       return result;
-
-    }
-
+        async addGame(userId: string, gameId: string, name: string, key: string, saleId: string): Promise<void> {
+          try {
+            const user = await this.userModel.findOne({ _id: userId });
+            if (!user) {
+              throw new Error("User not found!");
+            }
+      
+            const newGame = {
+              gameId: gameId,
+              name: name,
+              key: key,
+              saleId: saleId,
+            };
+      
+            user.games.push(newGame);
+            await user.save();
+          } catch (error) {
+            throw new Error(error.message);
+          }
+        }
 
 }
