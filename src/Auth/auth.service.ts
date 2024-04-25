@@ -163,6 +163,8 @@ export class AuthService{
           }
         }
 
+
+/*
         async addGame(userId: string, gameId: string, name: string, key: string, saleId: string): Promise<void> {
           try {
             const user = await this.userModel.findOne({ _id: userId });
@@ -183,5 +185,6 @@ export class AuthService{
             throw new Error(error.message);
           }
         }
-
+*/
 }
+

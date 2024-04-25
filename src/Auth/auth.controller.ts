@@ -86,13 +86,4 @@ export class AuthController{
     }
   }
            
-
-
-
-
-        @Post('insert_user')
-
-        InsertUser(@Body() userDto: AuthModel ) {
-          return this.authService.InsertUser(userDto.username, userDto.password, userDto.email, userDto.order_id);
-        }
 }
