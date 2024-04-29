@@ -3,33 +3,38 @@ import { Document } from "mongoose";
 
 @Schema ({timestamps: true})
 
-export class games  {
+@Schema()
+export class specs {
+  @Prop({ required: true })
+  ram: number;
 
-    @Prop()
-    title: string;
+  @Prop({ required: true })
+  cpuModel: string;
 
-    @Prop()
-    price: number;
+  @Prop({ required: true })
+  gpuModel: string;
 
-    @Prop()
-    genre: string;
-
-    @Prop()
-    stock: number;
-
-    @Prop()
-    ram: number;
-
-    @Prop()
-    cpuModel: string;
-
-    @Prop()
-    gpuModel: string;
-
-    @Prop()
-    osType: string;
-
-
+  @Prop({ required: true })
+  osType: string;
 }
+
+@Schema()
+export class games {
+  @Prop({ required: true })
+  title: string;
+
+  @Prop({ required: true })
+  price: number;
+
+  @Prop({ required: true })
+  genre: string;
+
+  @Prop({ required: true })
+  stock: number;
+
+  @Prop({ type: specs, required: true })
+  specs: specs;
+}
+
 
 export const GamesSchema = SchemaFactory.createForClass(games)

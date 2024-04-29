@@ -6,8 +6,11 @@ export interface GamesModel extends Document {
         price: number,
         genre: string,
         stock: number,
-        ram: number,
-        cpuModel: string,
-        gpuModel: string,
-        osType: string
+        specs: {
+                cpuModel: string,
+                gpuModel: string,
+                ram: number,
+                 osType: string
+        }
+        
 }
