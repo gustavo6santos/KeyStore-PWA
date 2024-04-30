@@ -85,5 +85,17 @@ export class AuthController{
                return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({ error: error.message });
     }
   }
+
+  @Post('addGame')
+  async addGame(
+    @Body('userId') userId: string,
+    @Body('gameId') gameId: string,
+    @Body('name') name: string,
+    @Body('key') key: string,
+    @Body('saleId') saleId: string,
+  ): Promise<{ message: string }> {
+    const result = await this.authService.addGameToUser(userId, gameId, name, key, saleId);
+    return { message: result };
+  }
            
 }

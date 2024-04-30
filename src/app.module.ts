@@ -2,12 +2,12 @@ import { Module } from '@nestjs/common';
 import { AuthModule } from './Auth/auth.module';
 import { GamesModule } from './product/product.module';
 import { ReviewModule } from './review/review.module';
-import { ShopModule } from './shop/shop.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { GamesSchema } from './product/product.schema';
 import { UserSchema } from './Auth/auth.schema';
 import { GameController } from './product/product.controller';
 import { ReviewSchema } from './review/review.schema';
+import { ShopModule } from './shop/shop.module';
 import { ShopSchema } from './shop/shop.schema';
 
 
@@ -15,7 +15,7 @@ import { ShopSchema } from './shop/shop.schema';
   imports: [
     AuthModule, 
     MongooseModule.forFeature([{ name: 'user', schema: UserSchema }]), 
-    MongooseModule.forRoot('mongodb+srv://keystore:NsQHM43ExvP7BM3R@cluster0.elzyrqf.mongodb.net/User_DB')
+    MongooseModule.forRoot('mongodb+srv://keystore:NsQHM43ExvP7BM3R@cluster0.elzyrqf.mongodb.net/User_DB'), ShopModule
     ]
   
 })
@@ -55,9 +55,10 @@ export class ReviewAppModule {}
     ShopModule,
     MongooseModule.forFeature([{ name: 'shops', schema: ShopSchema }]),
     MongooseModule.forRoot('mongodb+srv://keystore:NsQHM43ExvP7BM3R@cluster0.elzyrqf.mongodb.net/Shop_DB')
-
   ]
 
 })
 
 export class ShopAppModule {}
+
+

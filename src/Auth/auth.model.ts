@@ -6,5 +6,17 @@ export interface AuthModel extends Document {
         email: string,
         password: string,
         order_id: string,
+        specs: {
+                cpuModel: string,
+                gpuModel: string,
+                ram: number,
+                 osType: string
+        },
+        games: {
+                gameid: string,
+                name: string,
+                key: string,
+                saleId: string
+        }
 }
 

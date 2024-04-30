@@ -12,10 +12,10 @@ export class shops  {
     userId: string;
 
     @Prop()
-    amount: number;
+    date: Date;
 
     @Prop()
-    saleDate: Date;
+    game_key: string;
 }
 
 export const ShopSchema = SchemaFactory.createForClass(shops)

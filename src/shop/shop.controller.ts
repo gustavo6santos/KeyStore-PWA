@@ -1,15 +1,24 @@
-import { Body, Controller, Post, Get, Delete, Header, Param , UseGuards, Req, Res, HttpStatus, Put, Patch} from "@nestjs/common";
-import { sign } from "crypto";
-import { get } from "mongoose";
-import { response } from "express";
-import { request } from "http";
-import { ShopService } from "./shop.service";
-
+import { Controller } from '@nestjs/common';
+import { ShopService } from './shop.service';
+import { Post, Body, Res, HttpStatus } from '@nestjs/common';
 
 @Controller('shops')
 
-export class ShopController{
+export class ShopController {
 
     constructor(private shopService: ShopService) {}
 
+    @Post('add')
+
+        async addPurchase(@Body() purchaseData: any, @Res() res) {
+
+            const { gameid, userEmail, token } = purchaseData;
+
+            try {
+            const message = await this.shopService.addPurchase(gameid, userEmail, token);
+            return res.status(HttpStatus.CREATED).json(message);
+            } catch (error) {
+            return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: "Internal server error" });
+            }
+        }
 }

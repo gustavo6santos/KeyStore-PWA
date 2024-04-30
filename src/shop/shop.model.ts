@@ -4,7 +4,7 @@ export interface ShopModel extends Document {
   
         gameid: string,
         userId: string,
-        amount: number,
-        saleDate: string
+        date: Date,
+        game_key: string
         
 }

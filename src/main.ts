@@ -13,7 +13,7 @@ async function bootstrap() {
   await app2.listen(3335);
 
   const app3 = await NestFactory.create(ShopAppModule);
-  await app2.listen(3336);
-  
+  await app3.listen(3332);
+
 }
 bootstrap();

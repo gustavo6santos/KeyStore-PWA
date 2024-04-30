@@ -4,7 +4,7 @@ import { Model } from "mongoose";
 import { AuthModule } from "./auth.module";
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
-import { user } from "./auth.schema";
+import { games, user } from "./auth.schema";
 
 
 
@@ -153,16 +153,37 @@ export class AuthService{
         }
     
 
-        async verifyUserByEmail(email: string): Promise<boolean> {
+        async verifyUserByEmail(email: string): Promise<any> {
           try {
             // Check if user exists in the database
             const user = await this.userModel.findOne({ email });
-            return !!user; // Return true if user exists, false otherwise
+            await user.save();
+            console.log(user);
+            return user; // Return true if user exists, false otherwise
           } catch (error) {
             throw new Error(error.message);
           }
         }
-
+        
+        async addGameToUser(userId: string, newGame: any, name:string, gameKey:string, saleId:string): Promise<any> {
+          try {
+            // Find the user by user ID
+            const user = await this.userModel.findById(userId).exec();
+            if (!user) {
+              throw new Error('User not found');
+            }
+      
+            // Push the new game to the user's games array
+            user.games.push(newGame);
+      
+            // Save the user document to persist the changes
+            return user.save();
+      
+            return { message: 'Game added to user successfully' };
+          } catch (error) {
+            throw new Error(`Failed to add game to user: ${error.message}`);
+          }
+        }
 
 /*
         async addGame(userId: string, gameId: string, name: string, key: string, saleId: string): Promise<void> {
