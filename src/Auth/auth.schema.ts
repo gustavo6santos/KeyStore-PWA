@@ -6,37 +6,6 @@ import { Document } from "mongoose";
 
 @Schema ({timestamps: true})
 
-@Schema()
-export class specs {
-  @Prop({ required: true })
-  ram: number;
-
-  @Prop({ required: true })
-  cpuModel: string;
-
-  @Prop({ required: true })
-  gpuModel: string;
-
-  @Prop({ required: true })
-  osType: string;
-}
-
-@Schema()
-export class games {
-  @Prop({ required: true })
-  title: string;
-
-  @Prop({ required: true })
-  price: number;
-
-  @Prop({ required: true })
-  genre: string;
-
-  @Prop({ required: true })
-  stock: number;
-
-}
-
 export class user  {
 
     @Prop()
@@ -51,9 +20,6 @@ export class user  {
     @Prop()
     order_id: string;
 
-    @Prop({ type: specs, required: true })
-    specs: specs;
-
     @Prop([{
         gameId: String,
         name: String,
@@ -65,6 +31,19 @@ export class user  {
         name: string;
         key: string;
         saleId: string;
+      }[];
+
+      @Prop([{
+        ram: Number,
+        cpuModel: String,
+        gpuModel: String,
+        osType: String
+      }])
+      specs: {
+        ram: number;
+        cpuModel: string;
+        gpuModel: string;
+        osType: string;
       }[];
 }
 

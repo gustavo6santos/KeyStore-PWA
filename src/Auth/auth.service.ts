@@ -4,7 +4,7 @@ import { Model } from "mongoose";
 import { AuthModule } from "./auth.module";
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
-import { games, user } from "./auth.schema";
+import { user } from "./auth.schema";
 
 
 
