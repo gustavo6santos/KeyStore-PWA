@@ -5,6 +5,7 @@ import { AuthModule } from "./auth.module";
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
 import { user } from "./auth.schema";
+import { stringify } from "querystring";
 
 
 
@@ -165,17 +166,18 @@ export class AuthService{
           }
         }
         
-        async addGameToUser(userId: string, newGame: any, name:string, gameKey:string, saleId:string): Promise<any> {
+        async addGame(userId: string, gameId: string, name:string, key:string, saleId:string): Promise<any> {
           try {
             // Find the user by user ID
             const user = await this.userModel.findById(userId).exec();
             if (!user) {
               throw new Error('User not found');
             }
+
+            const newGame = { gameId: gameId, name: name, key: key, saleId: saleId};
       
             // Push the new game to the user's games array
             user.games.push(newGame);
-      
             // Save the user document to persist the changes
             return user.save();
       

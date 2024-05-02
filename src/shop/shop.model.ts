@@ -2,9 +2,9 @@ import * as mongoose from 'mongoose';
 
 export interface ShopModel extends Document {
   
-        gameid: string,
+        gameId: string,
         userId: string,
-        date: Date,
-        game_key: string
+        saleDate: Date,
+        amount: string
         
 }

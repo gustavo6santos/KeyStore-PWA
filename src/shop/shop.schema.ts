@@ -6,16 +6,16 @@ import { Document } from "mongoose";
 export class shops  {
 
     @Prop()
-    gameid: string;
+    gameId: string;
 
     @Prop()
     userId: string;
 
     @Prop()
-    date: Date;
+    saleDate: Date;
 
     @Prop()
-    game_key: string;
+    amount: string;
 }
 
 export const ShopSchema = SchemaFactory.createForClass(shops)

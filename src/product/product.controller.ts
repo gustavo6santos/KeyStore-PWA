@@ -1,7 +1,7 @@
 import { Body, Controller, Post, Get, Delete, Header, Param , UseGuards, Req, Res, HttpStatus, Put, Patch} from "@nestjs/common";
 import { sign } from "crypto";
 import { get } from "mongoose";
-import { response } from "express";
+import { Response } from "express";
 import { request } from "http";
 import { GameService } from "./product.service";
 import { GamesSchema, games, specs } from "./product.schema";
@@ -129,9 +129,9 @@ export class GameController{
         }
 
 
-        @Patch('reduceStock/:id')
+        @Put('reduceStock/:id')
         
-        async reduceStock(@Param('id') id: string, @Res() res) {
+        async reduceStock(@Param('id') id: string, @Res() res: Response): Promise<Response>  {
 
         try {
         const message = await this.gameService.reduceStock(id);

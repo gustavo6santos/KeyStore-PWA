@@ -94,7 +94,7 @@ export class AuthController{
     @Body('key') key: string,
     @Body('saleId') saleId: string,
   ): Promise<{ message: string }> {
-    const result = await this.authService.addGameToUser(userId, gameId, name, key, saleId);
+    const result = await this.authService.addGame(userId, gameId, name, key, saleId);
     return { message: result };
   }
            
